@@ -9,7 +9,7 @@ setup(
     name     = 'pikka-bird-receiver',
     version  = pikka_bird_receiver.__version__,
     packages = find_packages(),
-    scripts  = ['bin/pikka-bird-receiver'],
+    scripts  = [],
     
     author       = 'tiredpixel',
     author_email = 'tp@tiredpixel.com',
