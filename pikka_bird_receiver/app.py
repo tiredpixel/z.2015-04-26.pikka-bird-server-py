@@ -5,6 +5,7 @@ import sys
 from flask import Flask
 
 import pikka_bird_receiver.database
+import pikka_bird_receiver.routes.collections
 import pikka_bird_receiver.routes.statics
 
 
@@ -13,7 +14,11 @@ def create_app():
     
     app.debug = (os.environ['LOG_LEVEL'] == 'DEBUG')
     
-    app.register_blueprint(pikka_bird_receiver.routes.statics.statics)
+    for r in [
+        'collections',
+        'statics']:
+        app.register_blueprint(
+            getattr(getattr(pikka_bird_receiver.routes, r), r))
     
     __setup_logger(app.logger)
     

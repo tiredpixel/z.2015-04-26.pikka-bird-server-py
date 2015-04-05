@@ -1,10 +1,11 @@
 from sqlalchemy import orm
 
-from pikka_bird_receiver.database import Base
+import pikka_bird_receiver.database as db
+from pikka_bird_receiver.models.base import Base
 
 
-class Collection(Base):
-    __table__ = Base.metadata.tables['collections']
+class Collection(db.Base, Base):
+    __table__ = db.Base.metadata.tables['collections']
     
     machine = orm.relationship('Machine',
         backref=orm.backref('collections'))

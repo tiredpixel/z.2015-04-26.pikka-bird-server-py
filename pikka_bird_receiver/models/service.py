@@ -1,8 +1,9 @@
-from pikka_bird_receiver.database import Base
+import pikka_bird_receiver.database as db
+from pikka_bird_receiver.models.base import Base
 
 
-class Service(Base):
-    __table__ = Base.metadata.tables['services']
+class Service(db.Base, Base):
+    __table__ = db.Base.metadata.tables['services']
     
     def __init__(self, code):
         self.code = code
