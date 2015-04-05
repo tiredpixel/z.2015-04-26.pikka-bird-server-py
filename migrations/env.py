@@ -15,10 +15,14 @@ fileConfig(config.config_file_name)
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
+
+from pikka_bird_receiver.database import db_engine, Base
 from flask import current_app
+
 # config.set_main_option('sqlalchemy.url', current_app.config.get('SQLALCHEMY_DATABASE_URI'))
-config.set_main_option('sqlalchemy.url', str(current_app.db.url))
-target_metadata = current_app.extensions['migrate'].db.metadata
+config.set_main_option('sqlalchemy.url', str(db_engine.url))
+# target_metadata = current_app.extensions['migrate'].db.metadata
+target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
