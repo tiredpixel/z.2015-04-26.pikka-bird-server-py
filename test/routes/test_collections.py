@@ -1,6 +1,7 @@
 import datetime
 from flask import json
 
+import pikka_bird_server
 from pikka_bird_server.models.collection import Collection
 from pikka_bird_server.models.machine import Machine
 from pikka_bird_server.models.report import Report
@@ -41,6 +42,8 @@ class TestCollections:
         assert collection.hostname == 'localhost'
         assert collection.machine == machine
         assert collection.pid == 42
+        assert collection.version_server == pikka_bird_server.__version__
+        assert collection.version_collector == '1.2.3'
         
         assert Report.query.count() == 1
         report = Report.query.first()

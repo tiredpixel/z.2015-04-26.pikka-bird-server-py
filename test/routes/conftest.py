@@ -17,6 +17,7 @@ def collection_valid():
         'collecting_at': '2015-04-04T19:33:01.424242',
         'hostname': 'localhost',
         'pid': 42,
+        'version': '1.2.3',
         'reports': {
             'system': {
                 'load': {

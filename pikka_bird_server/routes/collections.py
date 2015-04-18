@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request
 
+import pikka_bird_server
 from pikka_bird_server.models.collection import Collection
 from pikka_bird_server.models.machine import Machine
 from pikka_bird_server.models.report import Report
@@ -22,7 +23,9 @@ def create():
                 collecting_at=data['collecting_at'],
                 collected_at=data['collected_at'],
                 hostname=data['hostname'],
-                pid=data['pid'])
+                pid=data['pid'],
+                version_server=pikka_bird_server.__version__,
+                version_collector=data['version'])
             
             for data_service, data_report in data['reports'].items():
                 service = Service.find(True, code=data_service)
