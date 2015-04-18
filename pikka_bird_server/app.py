@@ -4,13 +4,13 @@ import sys
 
 from flask import Flask
 
-import pikka_bird_receiver.database
-import pikka_bird_receiver.routes.collections
-import pikka_bird_receiver.routes.statics
+import pikka_bird_server.database
+import pikka_bird_server.routes.collections
+import pikka_bird_server.routes.statics
 
 
 def create_app():
-    app = Flask('pikka_bird_receiver')
+    app = Flask('pikka_bird_server')
     
     app.debug = (os.environ['LOG_LEVEL'] == 'DEBUG')
     
@@ -18,7 +18,7 @@ def create_app():
         'collections',
         'statics']:
         app.register_blueprint(
-            getattr(getattr(pikka_bird_receiver.routes, r), r))
+            getattr(getattr(pikka_bird_server.routes, r), r))
     
     __setup_logger(app.logger)
     

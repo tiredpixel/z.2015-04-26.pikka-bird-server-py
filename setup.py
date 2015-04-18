@@ -2,18 +2,18 @@
 
 from setuptools import setup, find_packages
 
-import pikka_bird_receiver
+import pikka_bird_server
 
 
 setup(
-    name     = 'pikka-bird-receiver',
-    version  = pikka_bird_receiver.__version__,
+    name     = 'pikka-bird-server',
+    version  = pikka_bird_server.__version__,
     packages = find_packages(),
     scripts  = [],
     
     author       = 'tiredpixel',
     author_email = 'tp@tiredpixel.com',
-    description  = "Pikka Bird monitoring tool metrics receiver.",
+    description  = "Pikka Bird monitoring tool Server component.",
     license      = '',
     keywords     = 'monitoring',
     url          = '',

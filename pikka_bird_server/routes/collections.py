@@ -1,9 +1,9 @@
 from flask import Blueprint, jsonify, request
 
-from pikka_bird_receiver.models.collection import Collection
-from pikka_bird_receiver.models.machine import Machine
-from pikka_bird_receiver.models.report import Report
-from pikka_bird_receiver.models.service import Service
+from pikka_bird_server.models.collection import Collection
+from pikka_bird_server.models.machine import Machine
+from pikka_bird_server.models.report import Report
+from pikka_bird_server.models.service import Service
 
 
 collections = Blueprint('collections', __name__)

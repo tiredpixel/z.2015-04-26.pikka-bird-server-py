@@ -16,7 +16,7 @@ fileConfig(config.config_file_name)
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 
-from pikka_bird_receiver.database import db_engine, Base
+from pikka_bird_server.database import db_engine, Base
 from flask import current_app
 
 # config.set_main_option('sqlalchemy.url', current_app.config.get('SQLALCHEMY_DATABASE_URI'))

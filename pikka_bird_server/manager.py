@@ -12,7 +12,7 @@ def create_manager(app):
 
 
 if __name__ == '__main__':
-    app     = Flask('pikka_bird_receiver')
+    app     = Flask('pikka_bird_server')
     manager = create_manager(app)
     
     db = SQLAlchemy(app)

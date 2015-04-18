@@ -5,7 +5,7 @@ if os.environ.get('CI') != '1':
 
 import pytest
 
-import pikka_bird_receiver.database as db
+import pikka_bird_server.database as db
 
 @pytest.fixture(autouse=True)
 def db_implode():

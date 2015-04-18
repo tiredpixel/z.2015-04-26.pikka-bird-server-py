@@ -1,5 +1,5 @@
-import pikka_bird_receiver.database as db
-from pikka_bird_receiver.models.base import Base
+import pikka_bird_server.database as db
+from pikka_bird_server.models.base import Base
 
 
 class Service(db.Base, Base):

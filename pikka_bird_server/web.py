@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 
-from pikka_bird_receiver.app import create_app
+from pikka_bird_server.app import create_app
 
 
 app = create_app()

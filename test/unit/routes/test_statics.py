@@ -1,6 +1,6 @@
 from flask import json
 
-import pikka_bird_receiver
+import pikka_bird_server
 
 
 class TestStatics:
@@ -11,5 +11,5 @@ class TestStatics:
         
         assert res.status_code == 200
         assert data == {
-            'service': 'pikka-bird-receiver',
-            'version': pikka_bird_receiver.__version__}
+            'service': 'pikka-bird-server',
+            'version': pikka_bird_server.__version__}
