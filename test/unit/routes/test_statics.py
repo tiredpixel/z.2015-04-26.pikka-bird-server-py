@@ -1,10 +1,11 @@
 from flask import json
+
 import pikka_bird_receiver
 
 
 class TestStatics:
     
-    def test_statics_index(self, client):
+    def test_index(self, client):
         res  = client.get('/')
         data = json.loads(res.data)
         
