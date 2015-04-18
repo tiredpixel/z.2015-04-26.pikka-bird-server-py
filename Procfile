@@ -1,1 +1,1 @@
-web:            gunicorn 'pikka_bird_server.web:app' -b "$HOST:$PORT" -w $GUNICORN_W --access-logfile -
+web:            bin/pikka-bird-server -i $IP -p $PORT -d $DATABASE_URI -w $WORKERS --log-level $LOG_LEVEL

@@ -1,0 +1,62 @@
+#!/usr/bin/env python
+
+import argparse
+import os
+import sys
+from gunicorn.app.wsgiapp import run
+
+
+defaults = {
+  'database_uri': 'postgresql://:@localhost:5432/pikka_bird',
+  'ip': '127.0.0.1',
+  'log_level': 'INFO',
+  'port': 5000,
+  'workers': 16}
+
+parser = argparse.ArgumentParser(
+    description="Pikka Bird monitoring tool Server component.")
+
+parser.add_argument('-i', '--ip',
+    metavar='IP',
+    default=defaults['ip'],
+    help="ip (default: %(ip)s)" % defaults)
+
+parser.add_argument('-p', '--port',
+    metavar='PORT',
+    type=int,
+    default=defaults['port'],
+    help="port (default: %(port)s))" % defaults)
+
+parser.add_argument('-d', '--database-uri',
+    metavar='DATABASE_URI',
+    default=defaults['database_uri'],
+    help="database URI (default: %(database_uri)s))" % defaults)
+
+parser.add_argument('-w', '--workers',
+    metavar='WORKERS',
+    type=int,
+    default=defaults['workers'],
+    help="workers (default: %(workers)s))" % defaults)
+
+parser.add_argument('--log-level',
+    metavar='LOG_LEVEL',
+    choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'],
+    default=defaults['log_level'],
+    help="log-level (default: %(log_level)s))" % defaults)
+
+args = parser.parse_args()
+
+
+gunicorn_argv = [
+  sys.argv[0],
+  'pikka_bird_server.web:app',
+  '-b', args.ip + ':' + str(args.port),
+  '-w', str(args.workers),
+  '--access-logfile',
+  '-']
+
+os.environ['DATABASE_URI'] = args.database_uri
+os.environ['LOG_LEVEL']    = args.log_level
+
+sys.argv = gunicorn_argv
+run()
