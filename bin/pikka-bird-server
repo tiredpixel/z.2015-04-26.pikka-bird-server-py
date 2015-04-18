@@ -53,6 +53,10 @@ parser.add_argument('--log-level',
     default=defaults['log_level'],
     help="log-level (default: %(log_level)s))" % defaults)
 
+parser.add_argument('-v', '--version',
+    action='version',
+    version="Pikka Bird Server v%(v)s" % { 'v': pikka_bird_server.__version__ })
+
 args = parser.parse_args()
 
 
