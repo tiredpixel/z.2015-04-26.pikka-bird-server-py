@@ -24,13 +24,13 @@ def create():
                 hostname=data['hostname'],
                 pid=data['pid'])
             
-            for data_report in data['reports']:
-                service = Service.find(True, code=data_report['service'])
+            for data_service, data_report in data['reports'].items():
+                service = Service.find(True, code=data_service)
                 
                 Report(
                     collection=collection,
                     service=service,
-                    data=data_report['data']) # attaches to collection
+                    data=data_report) # attaches to collection
         except KeyError:
             return jsonify(), 422
         
