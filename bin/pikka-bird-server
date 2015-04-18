@@ -3,18 +3,27 @@
 import argparse
 import os
 import sys
-from gunicorn.app.wsgiapp import run
+import gunicorn.app.wsgiapp
+
+import pikka_bird_server.manager
 
 
 defaults = {
-  'database_uri': 'postgresql://:@localhost:5432/pikka_bird',
-  'ip': '127.0.0.1',
-  'log_level': 'INFO',
-  'port': 5000,
-  'workers': 16}
+    'command': 'server',
+    'database_uri': 'postgresql://:@localhost:5432/pikka_bird',
+    'ip': '127.0.0.1',
+    'log_level': 'INFO',
+    'port': 5000,
+    'workers': 16}
 
 parser = argparse.ArgumentParser(
     description="Pikka Bird monitoring tool Server component.")
+
+parser.add_argument('-c', '--command',
+    metavar='COMMAND',
+    choices=['server', 'database-migrate'],
+    default=defaults['command'],
+    help="command (default: %(command)s)" % defaults)
 
 parser.add_argument('-i', '--ip',
     metavar='IP',
@@ -47,16 +56,23 @@ parser.add_argument('--log-level',
 args = parser.parse_args()
 
 
-gunicorn_argv = [
-  sys.argv[0],
-  'pikka_bird_server.web:app',
-  '-b', args.ip + ':' + str(args.port),
-  '-w', str(args.workers),
-  '--access-logfile',
-  '-']
-
 os.environ['DATABASE_URI'] = args.database_uri
 os.environ['LOG_LEVEL']    = args.log_level
 
-sys.argv = gunicorn_argv
-run()
+if args.command == 'server':
+    gunicorn_argv = [
+        sys.argv[0],
+        'pikka_bird_server.web:app',
+        '-b', args.ip + ':' + str(args.port),
+        '-w', str(args.workers),
+        '--access-logfile',
+        '-']
+    sys.argv = gunicorn_argv
+    gunicorn.app.wsgiapp.run()
+elif args.command == 'database-migrate':
+    manager_argv = [
+        sys.argv[0],
+        'db',
+        'upgrade']
+    sys.argv = manager_argv
+    pikka_bird_server.manager.run()

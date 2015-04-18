@@ -10,8 +10,7 @@ def create_manager(app):
     
     return manager
 
-
-if __name__ == '__main__':
+def run():
     app     = Flask('pikka_bird_server')
     manager = create_manager(app)
     
@@ -19,3 +18,7 @@ if __name__ == '__main__':
     flask.ext.migrate.Migrate(app, db) # attach for Alembic
     
     manager.run()
+
+
+if __name__ == '__main__':
+    run()
