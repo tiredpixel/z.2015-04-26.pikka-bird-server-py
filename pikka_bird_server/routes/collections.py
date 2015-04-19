@@ -28,6 +28,8 @@ def create():
                 version_server=pikka_bird_server.__version__,
                 version_collector=data['environment']['version'])
             
+            machine.update_hostname(data['environment']['hostname'])
+            
             for data_service, data_report in data['reports'].items():
                 service = Service.find(True, code=data_service)
                 

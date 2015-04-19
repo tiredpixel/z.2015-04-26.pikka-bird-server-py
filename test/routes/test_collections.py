@@ -27,7 +27,7 @@ class TestCollections:
         assert isinstance(machine.created_at, datetime.datetime)
         assert isinstance(machine.updated_at, datetime.datetime)
         assert machine.address == '127.0.0.1'
-        assert machine.hostname is None
+        assert machine.hostname == 'localhost'
         
         assert Service.query.count() == 1
         service = Service.query.first()
