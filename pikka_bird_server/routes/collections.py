@@ -22,10 +22,11 @@ def create():
                 machine=machine,
                 collecting_at=data['collecting_at'],
                 collected_at=data['collected_at'],
-                hostname=data['hostname'],
-                pid=data['pid'],
+                hostname=data['environment']['hostname'],
+                pid=data['environment']['pid'],
+                platform=data['environment']['platform'],
                 version_server=pikka_bird_server.__version__,
-                version_collector=data['version'])
+                version_collector=data['environment']['version'])
             
             for data_service, data_report in data['reports'].items():
                 service = Service.find(True, code=data_service)
