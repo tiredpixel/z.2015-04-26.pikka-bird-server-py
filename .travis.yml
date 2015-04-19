@@ -1,11 +1,13 @@
 language: python
 python:
   - '3.4'
-install: "pip install -r requirements.txt"
+install:
+  - "pip install ."
+  - "pip install -r requirements.txt"
 before_script:
   - "psql -c 'CREATE DATABASE pikka_bird_test;' -U postgres"
   - "bin/pikka-bird-server -c database-migrate -d postgresql://:@localhost:5432/pikka_bird_test"
-script: "py.test"
+script: "py.test -sv"
 env:
   - DATABASE_URI=postgresql://:@localhost:5432/pikka_bird_test
 notifications:
