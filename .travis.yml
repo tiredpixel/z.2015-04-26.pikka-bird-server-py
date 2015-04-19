@@ -11,7 +11,7 @@ before_script:
   - "bin/pikka-bird-server -c database-migrate -d postgresql://:@localhost:5432/pikka_bird_test"
 script: "py.test -sv"
 env:
-  - DATABASE_URI=postgresql://:@localhost:5432/pikka_bird_test
+  - DATABASE_URI=postgresql://:@localhost:5432/pikka_bird_test LOG_LEVEL=INFO
 notifications:
   email:
     recipients:
