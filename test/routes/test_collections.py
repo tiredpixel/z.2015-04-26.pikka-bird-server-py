@@ -57,7 +57,65 @@ class TestCollections:
         data = json.loads(res.data)
         
         assert res.status_code == 415
-        assert data == {}
+        assert data == {
+            'message': '415: Unsupported Media Type'}
+        
+        assert Machine.query.count() == 0
+        assert Service.query.count() == 0
+        assert Collection.query.count() == 0
+        assert Report.query.count() == 0
+    
+    def test_create_collection_empty(self, client):
+        res = client.post('/collections',
+            data=json.dumps({}),
+            headers={
+                'Content-Type': 'application/json'},
+            environ_base={
+                'REMOTE_ADDR': '127.0.0.1'})
+        data = json.loads(res.data)
+        
+        assert res.status_code == 422
+        assert data == {
+            'message': '422: Unprocessable Entity'}
+        
+        assert Machine.query.count() == 1
+        assert Service.query.count() == 0
+        assert Collection.query.count() == 0
+        assert Report.query.count() == 0
+    
+    def test_create_collection_partial(self, client, collection_valid):
+        collection_invalid = collection_valid.copy()
+        del collection_invalid['environment']['hostname']
+        
+        res = client.post('/collections',
+            data=json.dumps(collection_invalid),
+            headers={
+                'Content-Type': 'application/json'},
+            environ_base={
+                'REMOTE_ADDR': '127.0.0.1'})
+        data = json.loads(res.data)
+        
+        assert res.status_code == 422
+        assert data == {
+            'message': '422: Unprocessable Entity'}
+        
+        assert Machine.query.count() == 1
+        assert Service.query.count() == 0
+        assert Collection.query.count() == 0
+        assert Report.query.count() == 0
+    
+    def test_create_collection_invalid_url(self, client, collection_valid):
+        res = client.post('/this-is-not-the-service-you-are-looking-for',
+            data=json.dumps(collection_valid),
+            headers={
+                'Content-Type': 'application/json'},
+            environ_base={
+                'REMOTE_ADDR': '127.0.0.1'})
+        data = json.loads(res.data)
+        
+        assert res.status_code == 404
+        assert data == {
+            'message': '404: Not Found'}
         
         assert Machine.query.count() == 0
         assert Service.query.count() == 0

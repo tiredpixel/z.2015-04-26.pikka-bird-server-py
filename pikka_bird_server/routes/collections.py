@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, abort
 
 import pikka_bird_server
 from pikka_bird_server.models.collection import Collection
@@ -36,11 +36,11 @@ def create():
                     service=service,
                     data=data_report) # attaches to collection
         except KeyError:
-            return jsonify(), 422
+            abort(422)
         
         Collection.query.session.add(collection) # includes reports
         Collection.query.session.commit()
         
         return jsonify(), 201
     else:
-        return jsonify(), 415
+        abort(415)
