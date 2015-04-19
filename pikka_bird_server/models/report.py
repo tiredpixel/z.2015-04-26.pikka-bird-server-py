@@ -5,6 +5,13 @@ from pikka_bird_server.models.base import Base
 
 
 class Report(db.Base, Base):
+    """
+        Report containing metrics for a Machine and Service. A Collection has
+        many Reports. Metrics (db `reports.data`) are stored as JSON, allowing
+        full flexibility for collectors to support different services and
+        structures of data.
+        """
+    
     __table__ = db.Base.metadata.tables['reports']
     
     collection = orm.relationship('Collection',

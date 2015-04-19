@@ -5,6 +5,10 @@ from pikka_bird_server.models.base import Base
 
 
 class Collection(db.Base, Base):
+    """
+        Collection of Reports. This is what the collector sends in a POST.
+        """
+    
     __table__ = db.Base.metadata.tables['collections']
     
     machine = orm.relationship('Machine',

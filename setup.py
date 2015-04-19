@@ -9,14 +9,14 @@ setup(
     name     = 'pikka-bird-server',
     version  = pikka_bird_server.__version__,
     packages = find_packages(),
-    scripts  = [],
+    scripts  = ['bin/pikka-bird-server'],
     
     author       = 'tiredpixel',
     author_email = 'tp@tiredpixel.com',
-    description  = "Pikka Bird monitoring tool Server component.",
-    license      = '',
+    description  = "Pikka Bird ops monitoring tool Server component.",
+    license      = 'MIT',
     keywords     = 'monitoring',
-    url          = '',
+    url          = 'https://github.com/tiredpixel/pikka-bird-server-py',
     
     install_requires = [
     ]

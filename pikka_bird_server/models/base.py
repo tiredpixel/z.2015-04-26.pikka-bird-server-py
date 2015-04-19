@@ -2,10 +2,30 @@ from sqlalchemy.exc import IntegrityError
 
 
 class Base:
+    """
+        Base model, from which others inherit.
+        """
+    
     __cache_find = {}
     
     @classmethod
     def find(cls, cached=False, **kwargs):
+        """
+            Find a record, creating if it doesn't exist, potentially fetching
+            from cache.
+            
+            PARAMETERS:
+                cached : boolean
+                    whether to use cache; be considerate of memory, and only use
+                    for small sets
+                kwargs :
+                    record query to use; must be valid for create
+            
+            RETURN:
+                : db.Base
+                    record
+            """
+        
         if cached:
             cache_key = tuple(kwargs.items())
             

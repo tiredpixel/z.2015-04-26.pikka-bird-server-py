@@ -11,6 +11,10 @@ import pikka_bird_server.routes.statics
 
 
 def create_app():
+    """
+        Create application, using Flask. Payloads are in JSON.
+        """
+    
     app = Flask('pikka_bird_server')
     
     app.debug = (os.environ['LOG_LEVEL'] == 'DEBUG')

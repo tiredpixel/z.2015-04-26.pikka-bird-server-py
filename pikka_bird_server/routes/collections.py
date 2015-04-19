@@ -12,6 +12,11 @@ collections = Blueprint('collections', __name__)
 
 @collections.route('/collections', methods=['POST'])
 def create():
+    """
+        POST /collections
+        Route to which a collector sends metrics.
+        """
+    
     if request.headers['Content-Type'] == 'application/json':
         data = request.get_json()
         

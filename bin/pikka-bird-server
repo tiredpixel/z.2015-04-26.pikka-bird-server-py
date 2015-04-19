@@ -17,7 +17,7 @@ defaults = {
     'workers': 16}
 
 parser = argparse.ArgumentParser(
-    description="Pikka Bird monitoring tool Server component.")
+    description="Pikka Bird ops monitoring tool Server component.")
 
 parser.add_argument('-c', '--command',
     metavar='COMMAND',
