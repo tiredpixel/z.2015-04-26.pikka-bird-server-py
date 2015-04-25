@@ -6,6 +6,7 @@ if os.environ.get('CI') != 'true':
 import pytest
 
 import pikka_bird_server.database as db
+from pikka_bird_server.models.service import Service
 
 @pytest.fixture(autouse=True)
 def db_implode():
@@ -18,3 +19,5 @@ def db_implode():
     sql = 'TRUNCATE ' + ', '.join(tables)
     
     db.db_session.execute(sql)
+    
+    Service._Base__cache_find = {}

@@ -1,5 +1,6 @@
 import datetime
 from flask import json
+import msgpack
 
 import pikka_bird_server
 from pikka_bird_server.models.collection import Collection
@@ -10,15 +11,7 @@ from pikka_bird_server.models.service import Service
 
 class TestCollections:
     
-    def test_create(self, client, collection_valid):
-        res = client.post('/collections',
-            data=json.dumps(collection_valid),
-            headers={
-                'Content-Type': 'application/json'},
-            environ_base={
-                'REMOTE_ADDR': '127.0.0.1'})
-        data = json.loads(res.data)
-        
+    def assert_create_success(self, res, data):
         assert res.status_code == 201
         assert data == {}
         
@@ -50,6 +43,28 @@ class TestCollections:
         assert report.collection == collection
         assert report.data == {'load': {'avg_15_min': 1.62939453125}}
         assert report.service == service
+    
+    def test_create_json(self, client, collection_valid):
+        res = client.post('/collections',
+            data=json.dumps(collection_valid),
+            headers={
+                'Content-Type': 'application/json'},
+            environ_base={
+                'REMOTE_ADDR': '127.0.0.1'})
+        data = json.loads(res.data)
+        
+        self.assert_create_success(res, data)
+    
+    def test_create_binary(self, client, collection_valid):
+        res = client.post('/collections',
+            data=msgpack.packb(collection_valid),
+            headers={
+                'Content-Type': 'application/octet-stream'},
+            environ_base={
+                'REMOTE_ADDR': '127.0.0.1'})
+        data = json.loads(res.data)
+        
+        self.assert_create_success(res, data)
     
     def test_create_no_content_type(self, client, collection_valid):
         res = client.post('/collections',
