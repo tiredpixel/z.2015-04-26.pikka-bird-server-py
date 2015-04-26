@@ -41,13 +41,11 @@ Install the following externals:
   This is specific dependency, as extensive use is made of PostgreSQL-specific
   functionality which may not be available in other databases.
 
-There is currently no released [Pip][pip] package (stay tuned).
+Install using [Pip][pip]:
+
+    pip install pikka-bird-server
 
 There are currently no released server packages (stay tuned).
-
-Install dependencies using [Pip][pip]:
-
-    pip install -r requirements.txt
 
 Migrate the database:
 
@@ -82,6 +80,7 @@ environment variable `CI=true` (the tests are destructive to the database):
 
 Install locally using [Pip][pip] editable mode:
 
+    pip install -r requirements.txt
     pip install -e .
 
 Start a server using [Honcho][honcho], which reads `Procfile`:
