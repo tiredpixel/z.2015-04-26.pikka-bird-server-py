@@ -1,5 +1,6 @@
 # Pikka Bird Server (Python)
 
+[![PyPI version](https://badge.fury.io/py/pikka-bird-server.svg)](http://badge.fury.io/py/pikka-bird-server)
 [![Build Status](https://travis-ci.org/tiredpixel/pikka-bird-server-py.png?branch=master,stable)](https://travis-ci.org/tiredpixel/pikka-bird-server-py)
 
 Pikka Bird ops monitoring tool Server component.
