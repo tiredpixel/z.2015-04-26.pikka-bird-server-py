@@ -15,9 +15,7 @@ def run():
     app     = Flask('pikka_bird_server')
     manager = create_manager(app)
     
-    dir_migrations = os.path.realpath(os.path.join(
-        os.path.dirname(os.path.realpath(__file__)),
-        'migrations/'))
+    dir_migrations = os.path.join(os.path.dirname(__file__), 'migrations')
     
     db = SQLAlchemy(app)
     flask.ext.migrate.Migrate(app, db, directory=dir_migrations)
