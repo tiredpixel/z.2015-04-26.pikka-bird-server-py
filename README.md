@@ -50,14 +50,14 @@ There are currently no released server packages (stay tuned).
 
 Migrate the database:
 
-    bin/pikka-bird-server -c database-migrate
+    pikka-bird-server -c database-migrate
 
 
 ## Usage
 
 To run the API:
 
-    bin/pikka-bird-server
+    pikka-bird-server
 
 Run [Pikka Bird Collector][collector].
 
@@ -65,7 +65,7 @@ Look at your database. :P
 
 Help is at hand:
 
-    bin/pikka-bird-server -h
+    pikka-bird-server -h
 
 
 ## Development
